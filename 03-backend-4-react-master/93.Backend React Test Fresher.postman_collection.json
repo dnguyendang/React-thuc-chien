@@ -1,0 +1,1083 @@
+{
+	"info": {
+		"_postman_id": "0d829e84-5888-4da8-b07c-aee87754f6b1",
+		"name": "93.Backend React Test Fresher",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12317336"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "upload-type",
+								"value": "AVATAR",
+								"type": "default",
+								"disabled": true
+							},
+							{
+								"key": "delay",
+								"value": "5000",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "user@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{backend_url}}/api/v1/auth/login",
+							"host": [
+								"{{backend_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "fullName",
+									"value": "abc",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "asdfasfasfd@gamil.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "default"
+								},
+								{
+									"key": "phone",
+									"value": "123456",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{backend_url}}/api/v1/user/register",
+							"host": [
+								"{{backend_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetch account",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{backend_url}}/api/v1/auth/account",
+							"host": [
+								"{{backend_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{backend_url}}/api/v1/auth/logout",
+							"host": [
+								"{{backend_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{backend_url}}/api/v1/auth/refresh",
+							"host": [
+								"{{backend_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "normal user",
+			"item": [
+				{
+					"name": "book",
+					"item": [
+						{
+							"name": "get list book with paginate Copy",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/v1/book?current=1&pageSize=2",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"book"
+									],
+									"query": [
+										{
+											"key": "current",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "2"
+										},
+										{
+											"key": "author",
+											"value": "asfdafdasdf",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get book detail by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/v1/book/671f00e6d837e814177651f8",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"book",
+										"671f00e6d837e814177651f8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get category",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/v1/database/category",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"database",
+										"category"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "change password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "oldpass",
+									"value": "123456",
+									"type": "default"
+								},
+								{
+									"key": "newpass",
+									"value": "654321",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{backend_url}}/api/v1/user/change-password",
+							"host": [
+								"{{backend_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update info",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "fullName",
+									"value": "asdfasdf",
+									"type": "default"
+								},
+								{
+									"key": "phone",
+									"value": "sfasfasf",
+									"type": "default"
+								},
+								{
+									"key": "avatar",
+									"value": "adsfasfdaf",
+									"type": "text"
+								},
+								{
+									"key": "_id",
+									"value": "adfafasdfasfsfd",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{backend_url}}/api/v1/user",
+							"host": [
+								"{{backend_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload avatar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "upload-type",
+								"value": "avatar",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "fileImg",
+									"type": "file",
+									"src": "/C:/Users/tuan.pv/Desktop/a1.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{backend_url}}/api/v1/file/upload",
+							"host": [
+								"{{backend_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"file",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Order history",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{backend_url}}/api/v1/history",
+							"host": [
+								"{{backend_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"history"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create an order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test\",\r\n    \"address\": \"ha noi\",\r\n    \"phone\": \"123456789\",\r\n    \"totalPrice\": 123,\r\n    \"type\": \"COD\",\r\n    \"detail\": [\r\n        {\r\n            \"bookName\": \"abc\",\r\n            \"quantity\": 3,\r\n            \"_id\": \"67288bde2f83469ce7258c2c\"\r\n        }\r\n    ]\r\n   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{backend_url}}/api/v1/order",
+							"host": [
+								"{{backend_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "manage users",
+					"item": [
+						{
+							"name": "get all users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/v1/user",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get users with paginate",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/v1/user?current=1&pageSize=2",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									],
+									"query": [
+										{
+											"key": "current",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "2"
+										},
+										{
+											"key": "fullName",
+											"value": "I'm Admin",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create a user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "fullName",
+											"value": "asdfasfd",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "asfasfasfasdfasfd@gmail.comab",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "asfasfasf",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{backend_url}}/api/v1/user",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create list users (bulk)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "  [\r\n        {\r\n          \"fullName\": \"xyz\",\r\n          \"password\": \"123456\",\r\n          \"email\": \"aaaaabcxyz@gmail.com\",\r\n          \"phone\": \"123456789\"\r\n        },\r\n        {\r\n          \"fullName\": \"xyz\",\r\n          \"password\": \"123456\",\r\n          \"email\": \"aaaa1abcxyz@gmail.com\",\r\n          \"phone\": \"123456789\"\r\n        },\r\n         {\r\n          \"fullName\": \"xyz\",\r\n          \"password\": \"123456\",\r\n          \"email\": \"aaabcxyz@gmail.com\",\r\n          \"phone\": \"123456789\"\r\n        }\r\n]\r\n\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{backend_url}}/api/v1/user/bulk-create",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"bulk-create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete a user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/v1/user/641186751274d7b2bd327ad8",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"641186751274d7b2bd327ad8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update a user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "_id",
+											"value": "asfasfd",
+											"type": "default"
+										},
+										{
+											"key": "fullName",
+											"value": "asf",
+											"type": "default"
+										},
+										{
+											"key": "phone",
+											"value": "asdf",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{backend_url}}/api/v1/user",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "manage books",
+					"item": [
+						{
+							"name": "create a book",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"thumbnail\": \"ten-thumbnail\",\r\n    \"slider\": [\"ten-slider\", \"ten-slider\"],\r\n    \"mainText\": \"ten-sach\",\r\n    \"author\": \"ten-tac-gia\",\r\n    \"price\": 666666,\r\n    \"quantity\": 1000,\r\n    \"category\": \"Arts\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{backend_url}}/api/v1/book",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"book"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get list book with paginate",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/v1/book?current=1&pageSize=10",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"book"
+									],
+									"query": [
+										{
+											"key": "current",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										},
+										{
+											"key": "author",
+											"value": "asfdafdasdf",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update a book",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"thumbnail\": \"ten-thumbnail\",\r\n    \"slider\": [\"ten-slider\", \"ten-slider\"],\r\n    \"mainText\": \"ten-sach\",\r\n    \"author\": \"ten-tac-gia\",\r\n    \"price\": 666666,\r\n    \"quantity\": 1000,\r\n    \"category\": \"Arts\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{backend_url}}/api/v1/book/6412d89ffcfa72de7ed4254e",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"book",
+										"6412d89ffcfa72de7ed4254e"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete a book",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/v1/book/6412d89ffcfa72de7ed4254e",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"book",
+										"6412d89ffcfa72de7ed4254e"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "upload image book",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "upload-type",
+										"value": "book",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "fileImg",
+											"type": "file",
+											"src": "/C:/Users/ADMIN/Downloads/image/Shape 3.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{backend_url}}/api/v1/file/upload",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"file",
+										"upload"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get book category",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/v1/database/category",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"database",
+										"category"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "manage orders",
+					"item": [
+						{
+							"name": "get list order with paginate",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/v1/order?current=1&pageSize=10",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"order"
+									],
+									"query": [
+										{
+											"key": "current",
+											"value": "1"
+										},
+										{
+											"key": "pageSize",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "dashboard",
+					"item": [
+						{
+							"name": "get dashboard",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{backend_url}}/api/v1/database/dashboard",
+									"host": [
+										"{{backend_url}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"database",
+										"dashboard"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "backend_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInBob25lIjoiMTIzNDU2Nzg5IiwiZnVsbE5hbWUiOiJJJ20gQWRtaW4iLCJyb2xlIjoiQURNSU4iLCJzdWIiOiI2NzFmMDBlNmQ4MzdlODE0MTc3NjUxZjQiLCJhdmF0YXIiOiIyMTIzMmYyOTdhNTdhNWE3NDM4OTRhMGU0YTgwMWZjMy5wbmciLCJpYXQiOjE3MzAwODg2MTgsImV4cCI6MjU5NDA4ODYxOH0._0U_gf8ciaxC0uyleB0thxBDKyRc_ZcoLpyh3e8_WSo",
+			"type": "string"
+		}
+	]
+}
