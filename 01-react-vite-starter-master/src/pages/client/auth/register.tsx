@@ -1,11 +1,13 @@
 
 import type { FormProps } from 'antd';
-import { Button, Divider, Form, Input } from 'antd';
+import { App, Button, Divider, Form, Input } from 'antd';
 import './register.scss'
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { registerAPI } from 'services/api';
 
 type FieldType = {
-    fullname: string;
+    fullName: string;
     email: string;
     password: string;
     phone: string;
@@ -13,14 +15,21 @@ type FieldType = {
 
 const RegisterPage = () => {
     const [isSubmit, setIsSubmit] = useState(false)
+    const { message } = App.useApp();
+    const navigate = useNavigate();
 
-    const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
-        console.log('Success:', values);
-        form.resetFields();
-    };
+    const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+        setIsSubmit(true);
+        const { fullName, email, password, phone } = values;
+        const res = await registerAPI(fullName, email, password, phone)
 
-    const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
-        console.log('Failed:', errorInfo);
+        if (res.data) {
+            message.success("Dăng ký user thành công")
+            navigate("/login")
+        } else {
+            message.error(res.message)
+        }
+        setIsSubmit(false);
     };
 
     return (
@@ -42,7 +51,7 @@ const RegisterPage = () => {
                             <Form.Item<FieldType>
                                 labelCol={{ span: 24 }} // whole column
                                 label="Họ tên"
-                                name="fullname"
+                                name="fullName"
                                 rules={[{ required: true, message: 'Họ tên không được để trống!' }]}
                             >
                                 <Input />
@@ -84,7 +93,9 @@ const RegisterPage = () => {
                                 </Button>
                             </Form.Item>
                             <Divider>Or</Divider>
-
+                            <p className='text text-normal' style={{ textAlign: 'center' }}>
+                                Đã có tài khoản? <Link to="/login">Đăng nhập</Link>
+                            </p>
                         </Form>
                     </section>
                 </div>
