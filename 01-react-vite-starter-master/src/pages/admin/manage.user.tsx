@@ -1,9 +1,10 @@
+import TableUser from "components/admin/user/table.user";
 
 
 const ManageUserPage = () => {
     return (
         <div>
-            ManageUserPage
+            <TableUser />
         </div>
     )
 }
