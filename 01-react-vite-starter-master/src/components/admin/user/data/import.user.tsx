@@ -122,7 +122,7 @@ const ImportUser = (props: IProps) => {
             <Modal title="Import Data User"
                 width={"50vw"}
                 open={openImportModal}
-                onOk={() => setOpenImportModal(false)}
+                onOk={() => handleImport()}
                 onCancel={() => {
                     setOpenImportModal(false)
                     setDataImport([])

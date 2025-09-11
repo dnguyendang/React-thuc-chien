@@ -1,13 +1,16 @@
-import { getUsersAPI } from '@/services/api';
+import { deleteUserAPI, getUsersAPI } from '@/services/api';
 import { dateRangeValidate } from '@/services/helper';
 import { CloudUploadOutlined, DeleteTwoTone, EditTwoTone, ExportOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
-import { Button } from 'antd';
+import { Button, message, notification, Popconfirm } from 'antd';
 import { useRef, useState } from 'react';
 import DetailUser from './detail.user';
 import CreateUser from './create.user';
 import ImportUser from './data/import.user';
+import { CSVLink } from "react-csv";
+import UpdateUser from './update.user';
+import DeleteUser from './delete.user';
 
 type TSearch = {
     fullName: string;
@@ -27,8 +30,14 @@ const TableUser = () => {
 
     const [dataViewDetail, setDataViewDetail] = useState<IUserTable | null>(null);
     const [openViewDetail, setOpenViewDetail] = useState<boolean>(false);
+
     const [openCreateUserModal, setOpenCreateUserModal] = useState<boolean>(false)
+
     const [openImportModal, setOpenImportModal] = useState<boolean>(false)
+    const [currentDataTable, setCurrentDataTable] = useState<IUserTable[]>([])
+
+    const [openUpdateUserModal, setOpenUpdateUserModal] = useState<boolean>(false)
+    const [dataUpdateUser, setDataUpdateUser] = useState<IUserTable | null>(null)
 
     const columns: ProColumns<IUserTable>[] = [
         {
@@ -83,11 +92,24 @@ const TableUser = () => {
                         <EditTwoTone
                             twoToneColor={"#f57800"}
                             style={{ cursor: "pointer", marginRight: 15 }}
+                            onClick={() => {
+                                setDataUpdateUser(entity)
+                                setOpenUpdateUserModal(true)
+                            }}
                         />
-                        <DeleteTwoTone
-                            twoToneColor={"#ff4d4f"}
-                            style={{ cursor: "pointer" }}
-                        />
+                        <Popconfirm
+                            title="Xác nhận xóa user"
+                            description="Bạn có chắc chắn muốn xóa user này?"
+                            okText="Xác nhận"
+                            cancelText="Hủy"
+                            onConfirm={() => handleDeleteUser(entity._id)}
+                            placement='leftTop'
+                        >
+                            <DeleteTwoTone
+                                twoToneColor={"#ff4d4f"}
+                                style={{ cursor: "pointer" }}
+                            />
+                        </Popconfirm>
                     </>
                 )
             },
@@ -96,6 +118,19 @@ const TableUser = () => {
 
     const refreshTable = () => {
         actionRef.current?.reload();
+    }
+
+    const handleDeleteUser = async (id: string) => {
+        const res = await deleteUserAPI(id)
+        if (res && res.data) {
+            message.success('Xóa user thành công');
+            refreshTable();
+        } else {
+            notification.error({
+                message: "Đã có lỗi xảy ra!",
+                description: res.message
+            })
+        }
     }
 
     return (
@@ -130,6 +165,7 @@ const TableUser = () => {
                     const res = await getUsersAPI(query);
                     if (res.data) {
                         setMeta(res.data.meta)
+                        setCurrentDataTable(res.data?.result ?? [])
                     }
                     return {
                         data: res.data?.result,
@@ -157,7 +193,12 @@ const TableUser = () => {
                         icon={<ExportOutlined />}
                         type="primary"
                     >
-                        Export
+                        <CSVLink
+                            data={currentDataTable}
+                            filename='export-user.csv'
+                        >
+                            Export
+                        </CSVLink>
                     </Button>,
                     <Button
                         icon={<CloudUploadOutlined />}
@@ -190,12 +231,19 @@ const TableUser = () => {
                 setOpenCreateUserModal={setOpenCreateUserModal}
                 refreshTable={refreshTable}
             />
-
             <ImportUser
                 openImportModal={openImportModal}
                 setOpenImportModal={setOpenImportModal}
                 refreshTable={refreshTable}
             />
+            <UpdateUser
+                openUpdateUserModal={openUpdateUserModal}
+                setOpenUpdateUserModal={setOpenUpdateUserModal}
+                dataUpdateUser={dataUpdateUser}
+                setDataUpdateUser={setDataUpdateUser}
+                refreshTable={refreshTable}
+            />
+
         </>
     );
 };
