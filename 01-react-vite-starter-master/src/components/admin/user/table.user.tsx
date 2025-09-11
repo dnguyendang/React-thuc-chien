@@ -39,6 +39,8 @@ const TableUser = () => {
     const [openUpdateUserModal, setOpenUpdateUserModal] = useState<boolean>(false)
     const [dataUpdateUser, setDataUpdateUser] = useState<IUserTable | null>(null)
 
+    const [isDeleteUser, setIsDeleteUser] = useState<boolean>(false)
+
     const columns: ProColumns<IUserTable>[] = [
         {
             dataIndex: 'index',
@@ -104,6 +106,8 @@ const TableUser = () => {
                             cancelText="Hủy"
                             onConfirm={() => handleDeleteUser(entity._id)}
                             placement='leftTop'
+                            okButtonProps={{ loading: isDeleteUser }}
+
                         >
                             <DeleteTwoTone
                                 twoToneColor={"#ff4d4f"}
@@ -121,6 +125,7 @@ const TableUser = () => {
     }
 
     const handleDeleteUser = async (id: string) => {
+        setIsDeleteUser(true)
         const res = await deleteUserAPI(id)
         if (res && res.data) {
             message.success('Xóa user thành công');
@@ -131,6 +136,7 @@ const TableUser = () => {
                 description: res.message
             })
         }
+        setIsDeleteUser(false)
     }
 
     return (
