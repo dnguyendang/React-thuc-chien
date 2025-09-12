@@ -57,3 +57,39 @@ export const deleteUserAPI = (id: string) => {
     const urlBackend = `/api/v1/user/${id}`;
     return axios.delete<IBackendRes<IRegister>>(urlBackend)
 }
+
+export const getBooksAPI = (query: string) => {
+    const urlBackend = `/api/v1/book?${query}`;
+    return axios.get<IBackendRes<IModelPaginate<IBookTable>>>(urlBackend)
+}
+
+export const createBookAPI = (data: {
+    thumbnail: string,
+    slider: string[],
+    mainText: string,
+    author: string,
+    price: number,
+    quantity: number,
+    category: string
+}) => {
+    const urlBackend = '/api/v1/book';
+    return axios.post<IBackendRes<IBookTable>>(urlBackend, data)
+}
+
+export const updateBookAPI = (data: {
+    thumbnail: string,
+    slider: string[],
+    mainText: string,
+    author: string,
+    price: number,
+    quantity: number,
+    category: string
+}) => {
+    const urlBackend = '/api/v1/book';
+    return axios.put<IBackendRes<IBookTable>>(urlBackend, data)
+}
+
+export const deleteBookAPI = (id: string) => {
+    const urlBackend = `/api/v1/book/${id}`;
+    return axios.delete<IBackendRes<IBookTable>>(urlBackend)
+}

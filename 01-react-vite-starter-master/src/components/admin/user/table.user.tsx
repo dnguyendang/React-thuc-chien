@@ -10,7 +10,6 @@ import CreateUser from './create.user';
 import ImportUser from './data/import.user';
 import { CSVLink } from "react-csv";
 import UpdateUser from './update.user';
-import DeleteUser from './delete.user';
 
 type TSearch = {
     fullName: string;
