@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 export const FORMATE_DATE = "YYYY-MM-DD"
 export const FORMATE_DATE_VN = "DD-MM-YYYY"
 
-export const MAX_UPLOAD_IMAGE_SIZE = 2; //2MB
+export const MAX_UPLOAD_IMAGE_SIZE = 5; //5MB
 
 export const dateRangeValidate = (dateRange: any) => {
     if (!dateRange) return undefined;

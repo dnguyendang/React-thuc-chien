@@ -7,6 +7,7 @@ import { useRef, useState } from "react";
 import { CSVLink } from "react-csv";
 import DetailBook from "./detail.book";
 import CreateBook from "./create.book";
+import UpdateBook from "./update.book";
 
 
 type TSearch = {
@@ -219,17 +220,17 @@ const TableBook = () => {
                 }}
                 headerTitle="Table book"
                 toolBarRender={() => [
-                    <Button
-                        icon={<ExportOutlined />}
-                        type="primary"
+                    <CSVLink
+                        data={currentDataTable}
+                        filename='export-book.csv'
                     >
-                        <CSVLink
-                            data={currentDataTable}
-                            filename='export-book.csv'
+                        <Button
+                            icon={<ExportOutlined />}
+                            type="primary"
                         >
                             Export
-                        </CSVLink>
-                    </Button>,
+                        </Button >
+                    </CSVLink>,
                     <Button
                         key="button"
                         icon={<PlusOutlined />}
@@ -240,10 +241,9 @@ const TableBook = () => {
                     >
                         Add new
                     </Button>
-
                 ]}
             />
-            <DetailBook
+            < DetailBook
                 dataViewBookDetail={dataViewBookDetail}
                 openViewBookDetail={openViewBookDetail}
                 setDataViewBookDetail={setDataViewBookDetail}
@@ -253,6 +253,14 @@ const TableBook = () => {
                 openCreateBookModal={openCreateBookModal}
                 refreshTable={refreshTable}
                 setOpenCreateBookModal={setOpenCreateBookModal}
+            />
+
+            <UpdateBook
+                openUpdateBookModal={openUpdateBookModal}
+                dataUpdateBook={dataUpdateBook}
+                refreshTable={refreshTable}
+                setDataUpdateBook={setDataUpdateBook}
+                setOpenUpdateBookModal={setOpenUpdateBookModal}
             />
         </>
     )
