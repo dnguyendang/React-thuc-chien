@@ -1,0 +1,35 @@
+.homepage-container {
+    .customize-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px 10px; // gap 10px, co 5 items tren 1 row => 10*4=40 / 4 = 8
+
+        .column {
+            width: calc(20% - 8px);
+
+            &:hover {
+                box-shadow: 0 0.0625rem 20px 0 rgba(0, 0, 0, .05);
+                -webkit-transform: translateY(-0.0625rem);
+                transform: tranlateY(-0.0625rem);
+            }
+
+            .wrapper {
+                cursor: pointer;
+                box-shadow: 0 0.0625rem 0.125rem 0 rgba(0, 0, 0, .05);
+                border-radius: 0.125rem;
+                padding: .3rem;
+
+                .text {
+                    padding: 0.5rem 0;
+                    font-size: .75rem;
+                }
+
+                .rating {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+            }
+        }
+    }
+}
