@@ -1,6 +1,9 @@
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Col, Divider, Rate, Row } from "antd";
 import { useRef, useState } from "react"
+import { BsCartPlus } from "react-icons/bs";
 import ImageGallery from "react-image-gallery";
+import ModalGallery from "./modal.gallery";
 
 
 interface IProps {
@@ -83,18 +86,39 @@ const BookDetail = (props: IProps) => {
                                 </div>
                                 <div className="delivery">
                                     <div>
-                                        <span className="left">Van chuyen</span>
-                                        <span className="right">Mien phi vtan chuyen</span>
+                                        <span className="left">Vận chuyển</span>
+                                        <span className="right">Miễn phí vận chuyển</span>
                                     </div>
                                 </div>
-
+                                <div className="quantity">
+                                    <span className="left">Số lượng</span>
+                                    <span className="right">
+                                        <button><MinusOutlined /></button>
+                                        <input defaultValue={1} />
+                                        <button><PlusOutlined /></button>
+                                    </span>
+                                </div>
+                                <div className="buy">
+                                    <button className="cart">
+                                        <BsCartPlus className="icon-cart" />
+                                        <span>Thêm vào giỏ hàng</span>
+                                    </button>
+                                    <button className="now">Mua ngay</button>
+                                </div>
                             </Col>
                         </Col>
                     </Row>
                 </div>
             </div>
+            <ModalGallery
+                isOpen={isOpenModalGallery}
+                setIsOpen={setIsOpenModalGallery}
+                currentIndex={currentIndex}
+                items={images}
+                title={"hardcode"}
+            />
         </div>
     )
 }
 
-export default BookDetail
+export default BookDetail;
