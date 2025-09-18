@@ -1,40 +1,59 @@
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import { Col, Divider, Rate, Row } from "antd";
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { BsCartPlus } from "react-icons/bs";
 import ImageGallery from "react-image-gallery";
 import ModalGallery from "./modal.gallery";
-
+import "styles/book.scss"
 
 interface IProps {
-
+    currentBook: IBookTable | null
 }
 
 const BookDetail = (props: IProps) => {
+    const { currentBook } = props
+    const [imageGallery, setImageGallery] = useState<{
+        original: string;
+        thumbnail: string;
+        originalClass: string;
+        thumbnailClass: string;
+    }[]>([])
+
     const [isOpenModalGallery, setIsOpenModalGallery] = useState<boolean>(false);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
 
     const refGallery = useRef<ImageGallery>(null)
 
-    const images = [
-        {
-            original: "https://picsum.photos/id/1018/1000/600/",
-            thumbnail: "https://picsum.photos/id/1018/250/150/",
-            originalClass: "original-image",
-            thumbnailClass: "thumbnail-image"
-        },
-        {
-            original: "https://picsum.photos/id/1015/1000/600/",
-            thumbnail: "https://picsum.photos/id/1015/250/150/",
-            originalClass: "original-image",
-            thumbnailClass: "thumbnail-image"
-        },
-    ];
+    useEffect(() => {
+        if (currentBook) {
+            // build images
+            const images = [];
+            if (currentBook?.thumbnail) {
+                images.push({
+                    original: `${import.meta.env.VITE_BACKEND_URL}/images/book/${currentBook.thumbnail}`,
+                    thumbnail: `${import.meta.env.VITE_BACKEND_URL}/images/book/${currentBook.thumbnail}`,
+                    originalClass: "original-image",
+                    thumbnailClass: "thumbnail-image"
+                })
+            }
+            if (currentBook?.slider) {
+                currentBook.slider?.map(item => {
+                    images.push({
+                        original: `${import.meta.env.VITE_BACKEND_URL}/images/book/${item}`,
+                        thumbnail: `${import.meta.env.VITE_BACKEND_URL}/images/book/${item}`,
+                        originClass: "original-image",
+                        thumbnailClass: "thumbnail-image",
+                    })
+                })
+            }
+            setImageGallery(images)
+        }
+    }, [currentBook])
 
     const handleOnClickImage = () => {
         // get current index onClick
         setIsOpenModalGallery(true)
-        setCurrentIndex(refGallery?.current?.getCurrentIndex ?? 0)
+        setCurrentIndex(refGallery?.current?.getCurrentIndex() ?? 0)
     }
 
     return (
@@ -45,7 +64,7 @@ const BookDetail = (props: IProps) => {
                         <Col md={10} sm={0} xs={0}>
                             <ImageGallery
                                 ref={refGallery}
-                                items={images}
+                                items={imageGallery}
                                 showPlayButton={false}
                                 showFullscreenButton={false}
                                 renderLeftNav={() => <></>}
@@ -58,7 +77,7 @@ const BookDetail = (props: IProps) => {
                             <Col md={0} sm={24} xs={24}>
                                 <ImageGallery
                                     ref={refGallery}
-                                    items={images}
+                                    items={imageGallery}
                                     showPlayButton={false}
                                     showFullscreenButton={false}
                                     renderLeftNav={() => <></>}
@@ -68,20 +87,20 @@ const BookDetail = (props: IProps) => {
                                 />
                             </Col>
                             <Col span={24}>
-                                <div className="author">Tác giả: <a href="#">DungND</a></div>"
-                                <div className="title">How Psychology Works</div>
+                                <div className="author">Tác giả: <a href="#">{currentBook?.author}</a></div>
+                                <div className="title">{currentBook?.mainText}</div>
                                 <div className="rating">
                                     <Rate value={5} disabled style={{ color: '#ffce3d', fontSize: 10 }} />
                                     <span className="sold">
                                         <Divider type="vertical" />
-                                        Đã bán 6969
+                                        Đã bán {currentBook?.sold ?? 0}
                                     </span>
                                 </div>
                                 <div className="price">
                                     <span className="currency">
                                         {new Intl.NumberFormat(
                                             'vi-VN', { style: 'currency', currency: 'VND' }
-                                        ).format(10000)}
+                                        ).format(currentBook?.price ?? 0)}
                                     </span>
                                 </div>
                                 <div className="delivery">
@@ -114,8 +133,8 @@ const BookDetail = (props: IProps) => {
                 isOpen={isOpenModalGallery}
                 setIsOpen={setIsOpenModalGallery}
                 currentIndex={currentIndex}
-                items={images}
-                title={"hardcode"}
+                items={imageGallery}
+                title={currentBook?.mainText ?? ""}
             />
         </div>
     )

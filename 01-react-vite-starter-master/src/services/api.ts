@@ -120,3 +120,12 @@ export const uploadFileAPI = (fileImg: any, folder: string) => {
         },
     });
 }
+
+export const getBookByIdAPI = (id: string) => {
+    const urlBackend = `/api/v1/book/${id}`;
+    return axios.get<IBackendRes<IBookTable>>(urlBackend, {
+        headers: {
+            delay: 500
+        }
+    })
+}

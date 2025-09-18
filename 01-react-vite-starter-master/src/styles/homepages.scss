@@ -48,3 +48,44 @@
         }
     }
 }
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+    .homepage-container {
+        padding: 10px;
+
+        .customize-row {
+            gap: 10px;
+
+            .column {
+                width: calc(50% - 5px);
+                /* Two columns on mobile */
+                margin-bottom: 10px;
+
+                .wrapper {
+                    padding: 0.5rem;
+
+                    .thumbnail {
+                        img {
+                            height: 200px;
+                            /* Adjust thumbnail height for mobile */
+                        }
+                    }
+
+                    .text {
+                        font-size: 0.8rem;
+                        height: 40px;
+                    }
+
+                    .price {
+                        font-size: 0.9rem;
+                    }
+
+                    .rating {
+                        font-size: 0.7rem;
+                    }
+                }
+            }
+        }
+    }
+}
