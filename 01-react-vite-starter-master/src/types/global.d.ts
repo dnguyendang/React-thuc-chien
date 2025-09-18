@@ -81,4 +81,9 @@ declare global {
         updatedAt: Date;
     }
 
+    interface ICart {
+        _id: string;
+        quantity: number;
+        detail: IBookTable;
+    }
 }
