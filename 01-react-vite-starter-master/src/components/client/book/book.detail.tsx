@@ -1,5 +1,5 @@
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
-import { Col, Divider, Rate, Row } from "antd";
+import { Col, Divider, message, Rate, Row } from "antd";
 import { useEffect, useRef, useState } from "react"
 import { BsCartPlus } from "react-icons/bs";
 import ImageGallery from "react-image-gallery";
@@ -119,6 +119,7 @@ const BookDetail = (props: IProps) => {
             //sync React Context
             setCarts(data);
         }
+        message.success("Thêm sản phẩm vào giỏ hàng thành công.")
     }
     console.log(carts)
 

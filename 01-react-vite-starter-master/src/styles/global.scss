@@ -1,3 +1,44 @@
 * {
     margin: 0;
 }
+
+.popover-carts {
+    .pop-cart-body {
+        .pop-cart-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+
+            .book {
+                display: flex;
+                gap: 5px;
+
+                img {
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+
+        }
+
+        .pop-cart-footer {
+            margin-top: 10px;
+            display: flex;
+            justify-content: end;
+
+            button {
+                padding: 12px 20px;
+                border: none;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                background-color: #ee4d2d;
+            }
+        }
+    }
+}

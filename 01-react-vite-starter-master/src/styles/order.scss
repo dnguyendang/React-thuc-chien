@@ -1,0 +1,120 @@
+.order-container {
+    .order-book {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        border: 1px solid #f0f0f0;
+
+        .book-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+
+            img {
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+
+            .title {
+                font-size: 14px;
+                font-weight: 500;
+                color: #333;
+                margin-bottom: 5px;
+                line-height: 1.4;
+                flex: 2;
+                text-align: center;
+            }
+
+            .price {
+                font-size: 13px;
+                color: #777;
+                flex: 1;
+                text-align: center;
+            }
+        }
+
+        .action {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+
+            .quantity {
+                flex: 1;
+                text-align: center;
+                .ant-input-number {
+                    width: 70px;
+                }
+            }
+
+            .sum {
+                font-size: 14px;
+                color: #555;
+                font-weight: 500;
+                flex: 2;
+                text-align: center;
+            }
+
+            .anticon-delete {
+                flex: 0.2;
+                font-size: 20px;
+                cursor: pointer;
+                color: #ccc;
+                &:hover {
+                    color: #eb2f96;
+                }
+            }
+        }
+    }
+
+    .order-sum {
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        border: 1px solid #f0f0f0;
+
+        .calculate {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+
+            span {
+                font-size: 16px;
+                color: #555;
+            }
+
+            .sum-final {
+                font-size: 18px;
+                font-weight: bold;
+                color: #ee4d2d;
+            }
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ee4d2d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+
+            &:hover {
+                background-color: darken(#ee4d2d, 10%);
+            }
+        }
+    }
+}
