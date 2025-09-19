@@ -1,5 +1,6 @@
 import { useCurrentApp } from "@/components/context/app.context";
-import { Col, Form, FormProps, Input, InputNumber, Row } from "antd";
+import { DeleteTwoTone } from "@ant-design/icons";
+import { Col, Divider, Form, FormProps, Input, InputNumber, Radio, Row, Space } from "antd";
 import { useEffect, useState } from "react";
 
 
@@ -84,11 +85,7 @@ const Payment = (props: IProps) => {
                             </div>
                             <div className="action">
                                 <div className="quantity">
-                                    <InputNumber
-                                        // onChange={(value) => handleOnChangeInput(value as number, book.detail)}
-                                        value={book.quantity}
-
-                                    />
+                                    Số lượng: {book.quantity}
                                 </div>
                                 <div className="sum">
                                     Tổng:   {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(currentBookPrice * book.quantity || 0)}
@@ -110,6 +107,75 @@ const Payment = (props: IProps) => {
                         Quay trở lại
                     </span>
                 </div>
+            </Col>
+            <Col md={8} xs={24}>
+                <Form
+                    form={form}
+                    name="payment-form"
+                    onFinish={handlePlaceOrder}
+                    autoComplete="off"
+                    layout="vertical"
+                >
+                    <div className="order-sum">
+                        <Form.Item<FieldType>
+                            label="Hình thức thanh toán"
+                            name="method"
+                        >
+                            <Radio.Group>
+                                <Space direction="vertical">
+                                    <Radio value={"COD"}>Thanh toán khi nhận hàng</Radio>
+                                    <Radio value={"BANKING"}>Chuyển khoản ngân hàng</Radio>
+                                </Space>
+                            </Radio.Group>
+                        </Form.Item>
+
+                        <Form.Item<FieldType>
+                            label="Họ tên"
+                            name="fullName"
+                            rules={[
+                                { required: true, message: 'Họ tên không được để trống!' }
+                            ]}
+                        >
+                            <Input />
+                        </Form.Item>
+
+                        <Form.Item<FieldType>
+                            label="Số điện thoại"
+                            name="phone"
+                            rules={[
+                                { required: true, message: 'Số điện thoại không được để trống!' }
+                            ]}>
+                            <Input />
+                        </Form.Item>
+
+                        <Form.Item<FieldType>
+                            label="Địa chỉ nhận hàng"
+                            name="address"
+                            rules={[
+                                { required: true, message: 'Địa chỉ ngân hàng không được để trống!' }
+                            ]}>
+                            <TextArea rows={4} />
+                        </Form.Item>
+
+                        <div className="calculate">
+                            <span>  Tạm tính</span>
+                            <span>
+                                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice || 0)}
+                            </span>
+                        </div>
+                        <Divider style={{ margin: "10px 0" }} />
+
+                        <div className="calculate">
+                            <span>  Tổng tiền</span>
+                            <span className="sum-final">
+                                {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalPrice || 0)}
+                            </span>
+                        </div>
+                        <Divider style={{ margin: "10px 0" }} />
+
+                        <button type="submit">Đặt hàng ({carts?.length ?? 0})</button>
+                    </div>
+                </Form>
             </Col>
         </Row >
     )

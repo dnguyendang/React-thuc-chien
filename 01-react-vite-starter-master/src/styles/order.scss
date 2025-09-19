@@ -48,8 +48,9 @@
             flex: 1;
 
             .quantity {
-                flex: 1;
+                flex: 2;
                 text-align: center;
+
                 .ant-input-number {
                     width: 70px;
                 }
@@ -68,6 +69,7 @@
                 font-size: 20px;
                 cursor: pointer;
                 color: #ccc;
+
                 &:hover {
                     color: #eb2f96;
                 }

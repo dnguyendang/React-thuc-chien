@@ -92,7 +92,6 @@ const BookDetail = (props: IProps) => {
             //check exist
             let isExistIndex = carts.findIndex(c => c._id === currentBook?._id);
 
-
             if (isExistIndex > -1) {
                 carts[isExistIndex].quantity = carts[isExistIndex].quantity + currentQuantity;
             } else {
