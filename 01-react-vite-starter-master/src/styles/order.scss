@@ -102,21 +102,22 @@
             }
         }
 
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #ee4d2d;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
+        // button {
+        //     width: 100%;
+        //     padding: 12px;
+        //     background-color: #ee4d2d;
+        //     color: #fff;
+        //     border: none;
+        //     border-radius: 5px;
+        //     font-size: 16px;
+        //     font-weight: bold;
+        //     cursor: pointer;
+        //     transition: background-color 0.2s ease;
 
-            &:hover {
-                background-color: darken(#ee4d2d, 10%);
-            }
-        }
+        // &:hover {
+        //     background-color: darken(#ee4d2d, 10%);
+        // }
+
+        // }
     }
 }

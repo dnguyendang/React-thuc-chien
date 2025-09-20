@@ -1,6 +1,6 @@
 import { useCurrentApp } from "@/components/context/app.context";
 import { DeleteTwoTone } from "@ant-design/icons";
-import { Col, Divider, InputNumber, message, Row } from "antd";
+import { Button, Col, Divider, InputNumber, message, Row } from "antd";
 import { useEffect, useState } from "react";
 import "styles/order.scss"
 
@@ -36,7 +36,7 @@ const OrderDetail = (props: IProps) => {
                 const carts = JSON.parse(cartStorage) as ICart[];
 
                 // check exist
-                let isExistIndex = carts.findIndex(c => c._id === book?._id);
+                const isExistIndex = carts.findIndex(c => c._id === book?._id);
                 if (isExistIndex > -1) {
                     carts[isExistIndex].quantity = +value;
                 }
@@ -131,9 +131,12 @@ const OrderDetail = (props: IProps) => {
                                 </span>
                             </div>
                             <Divider style={{ margin: '10px 0' }} />
-                            <button
-                                onClick={handleNextStep}
-                            >Mua Hàng ({carts?.length ?? 0})</button>
+                            <Button
+                                color="danger" variant="solid"
+                                onClick={() => handleNextStep()}
+                            >
+                                Mua hàng ({carts?.length ?? 0})
+                            </Button>
                         </div>
                     </Col>
                 </Row>
