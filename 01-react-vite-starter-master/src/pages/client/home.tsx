@@ -1,9 +1,9 @@
 import { FilterTwoTone, MobileFilled, ReloadOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Col, Divider, Form, FormProps, InputNumber, Pagination, Rate, Row, Spin, Tabs } from "antd";
-import '@/styles/homepages.scss'
+import '@/styles/home.scss'
 import { useEffect, useState } from "react";
 import { getBookCategoryAPI, getBooksAPI } from "@/services/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import MobileFilter from "@/components/client/book/mobile.filter";
 
 type FieldType = {
@@ -15,6 +15,8 @@ type FieldType = {
 }
 
 const HomePage = () => {
+    const [searchTerm] = useOutletContext() as any;
+
     const [form] = Form.useForm();
     const navigate = useNavigate();
 
@@ -47,7 +49,7 @@ const HomePage = () => {
 
     useEffect(() => {
         fetchBook();
-    }, [current, pageSize, filter, sortQuery])
+    }, [current, pageSize, filter, sortQuery, searchTerm])
 
     const fetchBook = async () => {
         setIsLoading(true)
@@ -57,6 +59,10 @@ const HomePage = () => {
         }
         if (sortQuery) {
             query += `&${sortQuery}`;
+        }
+
+        if (searchTerm) {
+            query += `&mainText=/${searchTerm}/i`;
         }
 
         const res = await getBooksAPI(query);

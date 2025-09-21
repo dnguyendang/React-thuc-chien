@@ -49,7 +49,6 @@ const ImportUser = (props: IProps) => {
             }
 
             if (status === 'done') {
-                console.log(info)
                 message.success(`${info.file.name} file uploaded successfully.`);
 
                 if (info.fileList && info.fileList.length > 0) {

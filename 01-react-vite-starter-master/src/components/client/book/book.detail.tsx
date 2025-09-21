@@ -6,6 +6,7 @@ import ImageGallery from "react-image-gallery";
 import ModalGallery from "./modal.gallery";
 import "styles/book.scss"
 import { useCurrentApp } from "@/components/context/app.context";
+import { useNavigate } from "react-router-dom";
 
 interface IProps {
     currentBook: IBookTable | null
@@ -29,7 +30,9 @@ const BookDetail = (props: IProps) => {
 
     const [currentQuantity, setCurrentQuantity] = useState<number>(0)
 
-    const { carts, setCarts } = useCurrentApp();
+    const { setCarts, user } = useCurrentApp();
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (currentBook) {
@@ -82,7 +85,12 @@ const BookDetail = (props: IProps) => {
         }
     }
 
-    const handleAddToCart = () => {
+    const handleAddToCart = (isBuyNow = false) => {
+        if (!user) {
+            message.error("Bạn cần đăng nhập để thực hiện tính năng này.")
+            return;
+        }
+
         // update localStorage
         const cartStorage = localStorage.getItem("carts");
         if (cartStorage && currentBook) {
@@ -90,7 +98,7 @@ const BookDetail = (props: IProps) => {
             const carts = JSON.parse(cartStorage) as ICart[];
 
             //check exist
-            let isExistIndex = carts.findIndex(c => c._id === currentBook?._id);
+            const isExistIndex = carts.findIndex(c => c._id === currentBook?._id);
 
             if (isExistIndex > -1) {
                 carts[isExistIndex].quantity = carts[isExistIndex].quantity + currentQuantity;
@@ -118,9 +126,13 @@ const BookDetail = (props: IProps) => {
             //sync React Context
             setCarts(data);
         }
-        message.success("Thêm sản phẩm vào giỏ hàng thành công.")
+
+        if (isBuyNow) {
+            navigate("/order")
+        } else {
+            message.success("Thêm sản phẩm vào giỏ hàng thành công.")
+        }
     }
-    console.log(carts)
 
     return (
         <div style={{ background: '#efefef', padding: '20px 0' }}>
@@ -190,7 +202,9 @@ const BookDetail = (props: IProps) => {
                                         <BsCartPlus className="icon-cart" />
                                         <span>Thêm vào giỏ hàng</span>
                                     </button>
-                                    <button className="now">Mua ngay</button>
+                                    <button
+                                        onClick={() => handleAddToCart(true)}
+                                        className="now">Mua ngay</button>
                                 </div>
                             </Col>
                         </Col>
